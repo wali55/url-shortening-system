@@ -1,3 +1,6 @@
+## Live Site
+[https://url-shortening-71689d.netlify.app/](https://url-shortening-71689d.netlify.app/).
+
 ### Phase 1
 * I have declared 2 state variables. One of them is 'url' to take control of the value of the input field where user will put there long url. The other is 'shortenedUrls' that will display the shortened url on the screen after user submitted the long url.
 * Then I have written the 'shortenUrl' asynchronous function it will receive an event object and with the help of this I will prevent browsers default refreshing of page when the form is submitted. This function will be called when user will submit the long url.
