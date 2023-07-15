@@ -20,7 +20,7 @@ function ListPage({ shortenedUrls }) {
   const renderedList = shortenedUrls.map((item, index) => {
     return (
       <List.Item key={index}>
-        <a href={index} onClick={() => handleUrlClick(item)}>
+        <a href="#" onClick={() => handleUrlClick(item)}>
           {item}
         </a>
       </List.Item>
