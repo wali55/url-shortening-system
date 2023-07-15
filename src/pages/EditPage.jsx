@@ -35,7 +35,6 @@ function EditPage({ shortenedUrls, setShortenedUrls }) {
             value={item}
             onChange={(event) => handleEdit(index, event.target.value)}
           />
-          {/* <Divider type="vertical" /> */}
           <Button type="primary" danger onClick={() => handleDelete(index)}>
             Delete
           </Button>

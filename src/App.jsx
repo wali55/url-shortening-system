@@ -6,7 +6,7 @@ import ListPage from './pages/ListPage';
 import Header from './components/Header';
 
 function App() {
-  const [url, setUrl] = useState([]);
+  const [url, setUrl] = useState("");
   const [shortenedUrls, setShortenedUrls] = useState([]);
 
   // Load the saved shortened URLs from local storage
