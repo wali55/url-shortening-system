@@ -21,7 +21,7 @@ function EntryPage({ shortenUrl, url, setUrl, shortenedUrls }) {
             span: 16,
           }}
           style={{
-            maxWidth: 600,
+            maxWidth: 700,
           }}
           initialValues={{
             remember: true,

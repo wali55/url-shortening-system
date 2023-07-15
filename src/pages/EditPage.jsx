@@ -1,4 +1,4 @@
-import { List, Input, Button, Divider, Typography } from "antd";
+import { List, Input, Button, Typography, Space } from "antd";
 
 function EditPage({ shortenedUrls, setShortenedUrls }) {
   const { Title } = Typography;
@@ -9,7 +9,7 @@ function EditPage({ shortenedUrls, setShortenedUrls }) {
       backgroundColor: "#f0f3f2",
       height: "100vh",
     },
-    title: { marginBottom: 50, paddingLeft: 37 },
+    title: { marginBottom: 50, paddingLeft: 3, marginLeft: 37 },
   };
 
   const handleDelete = (index) => {
@@ -29,17 +29,17 @@ function EditPage({ shortenedUrls, setShortenedUrls }) {
   const renderedList = shortenedUrls.map((item, index) => (
     <List key={index}>
       <List.Item>
-        <p>Short URL: {item}</p>
-        <Divider type="vertical" />
-        <Input
-          type="text"
-          value={item}
-          onChange={(event) => handleEdit(index, event.target.value)}
-        />
-        <Divider type="vertical" />
-        <Button type="primary" danger onClick={() => handleDelete(index)}>
-          Delete
-        </Button>
+        <Space>
+          <Input
+            type="text"
+            value={item}
+            onChange={(event) => handleEdit(index, event.target.value)}
+          />
+          {/* <Divider type="vertical" /> */}
+          <Button type="primary" danger onClick={() => handleDelete(index)}>
+            Delete
+          </Button>
+        </Space>
       </List.Item>
     </List>
   ));
