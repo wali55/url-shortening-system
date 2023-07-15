@@ -1,13 +1,27 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import EntryPage from "./pages/EntryPage";
-import EditPage from "./pages/EditPage";
-import ListPage from "./pages/ListPage";
-import Header from "./components/Header";
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import EntryPage from './pages/EntryPage';
+import EditPage from './pages/EditPage';
+import ListPage from './pages/ListPage';
+import Header from './components/Header';
 
 function App() {
-  const [url, setUrl] = useState('');
-  const [shortenedUrl, setShortenedUrl] = useState([]);
+  const [url, setUrl] = useState([]);
+  const [shortenedUrls, setShortenedUrls] = useState([]);
+
+  // Load the saved shortened URLs from local storage
+  useEffect(() => {
+    const savedShortenedUrls = JSON.parse(localStorage.getItem("shortenedUrls"));
+    
+    if (savedShortenedUrls) {
+      setShortenedUrls(savedShortenedUrls);
+    }
+  }, []);
+
+  // Save the shortened URLs to local storage
+  useEffect(() => {
+    localStorage.setItem("shortenedUrls", JSON.stringify(shortenedUrls));
+  }, [shortenedUrls]);
 
   const shortenUrl = async (event) => {
     event.preventDefault();
@@ -17,15 +31,13 @@ function App() {
         `https://api.shrtco.de/v2/shorten?url=${url}`
       );
       const data = await response.json();
-      setShortenedUrl([...shortenedUrl, data.result.full_short_link]);
-      
+      setShortenedUrls([...shortenedUrls, data.result.full_short_link]);
     } catch (error) {
       alert(error);
     }
 
-    setUrl('');
+    setUrl("");
   };
-  
 
   return (
     <div>
@@ -38,14 +50,14 @@ function App() {
               shortenUrl={shortenUrl}
               url={url}
               setUrl={setUrl}
-              shortenedUrl={shortenedUrl[shortenedUrl.length - 1]}
+              shortenedUrls={shortenedUrls[shortenedUrls.length - 1]}
             />
           }
         />
-        <Route path="/edit" element={<EditPage />} />
+        <Route path="/edit" element={<EditPage shortenedUrls={shortenedUrls} setShortenedUrls={setShortenedUrls} url={url} />} />
         <Route
           path="/list"
-          element={<ListPage shortenedUrl={shortenedUrl} />}
+          element={<ListPage shortenedUrls={shortenedUrls} />}
         />
       </Routes>
     </div>
