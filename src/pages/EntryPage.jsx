@@ -1,25 +1,4 @@
-import { useState } from 'react';
-
-function EntryPage() {
-  const [url, setUrl] = useState();
-  const [shortenedUrl, setShortenedUrl] = useState('');
-
-  const shortenUrl = async (event) => {
-    event.preventDefault();
-    
-    try {
-      const response = await fetch(
-        `https://api.shrtco.de/v2/shorten?url=${url}`
-      );
-
-      const data = await response.json();
-      setShortenedUrl(data.result.full_short_link);
-    }
-    catch(error) {
-      alert(error);
-    }
-  };
-
+function EntryPage({ shortenUrl, url, setUrl, shortenedUrl }) {
   return (
     <div>
       <h2>URL Shortener</h2>
